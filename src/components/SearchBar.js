@@ -3,7 +3,13 @@ import './searchbar.css'
 
 
 const SearchBar = props => {
-    return <input className="search-bar" placeholder="Search" name="searchBar" type="text" />
-}
+
+    return (
+        <form onSubmit={(e)=>props.filterPostHandler(e)}>
+    <input className="search-bar" value={props.searchtext} onChange={props.changeHandler} placeholder="Search" name="searchtext" type="text" />
+        </form>
+    )
+} 
 
 export default SearchBar
+
