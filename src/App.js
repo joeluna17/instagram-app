@@ -1,14 +1,18 @@
 import React from 'react';
 import './App.css';
 import HeaderContainer from './components/HeaderContainer'
-import PostConatiner from './components/PostContainer'
 import  dummyData  from './dummy-data'
+import PostPage from './components/PostPage'
+import withAuthenticate from './components/authentication/withAuthenticate'
 
 
 
+// const PostPage = <PostPage {...this.state}   
+// addNewComment = {this.addNewComment}                             
+// changeHandler={this.changeHandler}                        
+// liked={this.likedHandler}  />
 
-
-
+const ComponentFromWithAuthenticate = withAuthenticate(PostPage)
 
 class App extends React.Component {
       constructor(){
@@ -77,31 +81,18 @@ class App extends React.Component {
         })
  }
 
+
 render(){
 
   return (
     <div className="App">
           <div className="header-section">
-                <HeaderContainer  searchtext={this.state.searchtext} changeHandler={this.changeHandler} filterPostHandler={this.filterPostHandler} />
+                <HeaderContainer  searchtext={this.state.searchtext}
+                 changeHandler={this.changeHandler} 
+                 filterPostHandler={this.filterPostHandler} />
           </div>
 
-          { 
-            this.state.posts.map((post,postId) => { 
-         
-                   return<PostConatiner   post={post}
-                                          key={post.timestamp} 
-                                          changeHandler={this.changeHandler} 
-                                          liked={this.likedHandler}
-                                          username={this.state.username} 
-                                          text={this.state.text} 
-                                          addNewComment = {this.addNewComment} 
-                                          postId={postId}    
-                                                                           
-                                          />       
-                    
-            })
-                 
-         }
+          <ComponentFromWithAuthenticate  {...this.state}/>
 
     </div>
   );
@@ -109,6 +100,8 @@ render(){
 }
 
 export default App;
+
+
 
 
 
