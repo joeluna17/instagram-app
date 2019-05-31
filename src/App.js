@@ -4,15 +4,13 @@ import HeaderContainer from './components/HeaderContainer'
 import  dummyData  from './dummy-data'
 import PostPage from './components/PostPage'
 import withAuthenticate from './components/authentication/withAuthenticate'
+import Login from './components/Login'
 
 
 
-// const PostPage = <PostPage {...this.state}   
-// addNewComment = {this.addNewComment}                             
-// changeHandler={this.changeHandler}                        
-// liked={this.likedHandler}  />
 
-const ComponentFromWithAuthenticate = withAuthenticate(PostPage)
+
+const ComponentFromWithAuthenticate = withAuthenticate(PostPage)(Login)
 
 class App extends React.Component {
       constructor(){
@@ -27,7 +25,6 @@ class App extends React.Component {
       }
 
  componentDidMount(){
-   console.log("CDM executing") //delete me
       this.setState({
           posts: dummyData,  // setting the state object kvp "posts" when the bare minimum components are loaded this will happen after ther constructor medthod is called
       })
@@ -92,9 +89,16 @@ render(){
                  filterPostHandler={this.filterPostHandler} />
           </div>
 
-          <ComponentFromWithAuthenticate  {...this.state}/>
+        
+
+          <ComponentFromWithAuthenticate  {...this.state} 
+          addNewComment = {this.addNewComment}                             
+          changeHandler={this.changeHandler}                        
+          liked={this.likedHandler}/>
+
 
     </div>
+
   );
 }
 }
